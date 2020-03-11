@@ -1,0 +1,36 @@
+{
+    "name": "yykpf/zookeeper-node-cache",
+    "description": "Command line cache of zookeeper node",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "predis/predis": "^1.1",
+        "php": ">=7.0.0"
+    },
+    "require-dev": {
+        "predis/predis": "^1.1",
+        "php": ">=7.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ZookeeperNodeCache\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ZookeeperNodeCache\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ZookeeperNodeCache\\Debugbar\\ServiceProvider"
+            ],
+            "aliases": {
+                "zk": "Barryvdh\\Debugbar\\Facade"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
