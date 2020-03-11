@@ -15,10 +15,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ZookeeperNodeCache\\Debugbar\\ServiceProvider"
+                "ZookeeperNodeCache\\ZookeeperServiceProvider"
             ],
             "aliases": {
-                "zk": "Barryvdh\\Debugbar\\Facade"
+                "zk": "ZookeeperNodeCache\\Facades\\ZookeeperFaced"
             }
         }
     },
