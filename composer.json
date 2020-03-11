@@ -12,13 +12,18 @@
             "ZookeeperNodeCache\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "ZookeeperNodeCache\\": "src/"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [
                 "ZookeeperNodeCache\\ZookeeperServiceProvider"
             ],
             "aliases": {
-                "zk": "ZookeeperNodeCache\\Facades\\ZookeeperFaced"
+                "zk": "ZookeeperNodeCache\\Facades\\ZookeeperFacade"
             }
         }
     },

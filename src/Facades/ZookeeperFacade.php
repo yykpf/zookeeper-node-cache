@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Facade;
  *
  * @package ZookeeperNodeCache\Facades
  */
-class ZookeeperFaced extends Facade {
+class ZookeeperFacade extends Facade {
 
     protected static function getFacadeAccessor()
     {
