@@ -84,7 +84,7 @@ class CommonFunctions {
      *
      * @return string
      */
-    public static function getZkConfigCache(string $key):void
+    public static function getZkConfigCache(string $key):string
     {
         return array_get(ZOOKEEPER_CACHE_STRATEGY_CONFIG, $key);
     }
