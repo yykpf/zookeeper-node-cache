@@ -1,7 +1,7 @@
 <?php
 namespace ZookeeperNodeCache\CacheStrategys;
 
-use ZookeeperNodeCache\InstanceTrait;
+use ZookeeperNodeCache\Tools\InstanceTrait;
 
 /**
  * Class NullCache

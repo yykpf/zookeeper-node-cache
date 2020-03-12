@@ -19,10 +19,10 @@
         
     5、执行命令 php artisan zookeeper:node:cache
     
-    6、调用方式 
+    6、调用方式 ($node 监听路劲[路径+版本号]下的节点值)
         use zk;
         
-            zk::getNode($key)   
+            zk::getNode($node)   
             
     7、如果想使用env缓存(目前支持文件类型的缓存)
         use zk;

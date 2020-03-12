@@ -1,8 +1,8 @@
 <?php
-namespace ZookeeperNodeCache\Services;
+namespace ZookeeperNodeCache\InsideServices;
 
 use ZookeeperNodeCache\CacheStrategys\CacheAbs;
-use ZookeeperNodeCache\InstanceTrait;
+use ZookeeperNodeCache\Tools\InstanceTrait;
 use ZookeeperNodeCache\Tools\CommonFunctions;
 
 /**

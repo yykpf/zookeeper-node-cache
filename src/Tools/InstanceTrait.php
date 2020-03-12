@@ -1,5 +1,5 @@
 <?php
-namespace ZookeeperNodeCache;
+namespace ZookeeperNodeCache\Tools;
 
 // 单例 trait
 trait InstanceTrait

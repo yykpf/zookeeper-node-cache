@@ -1,14 +1,13 @@
 <?php
-namespace ZookeeperNodeCache\Services;
+namespace ZookeeperNodeCache\InsideServices;
 
-use ZookeeperNodeCache\InstanceTrait;
 use ZookeeperNodeCache\Tools\CommonFunctions;
+use ZookeeperNodeCache\Tools\InstanceTrait;
 
 class ZookeeperBaseService {
 
     use InstanceTrait;
 
-    private static $zkConfig;
     private static $zk;
 
     /**
@@ -51,10 +50,7 @@ class ZookeeperBaseService {
      */
     private function getNodeValue($path, $default = '')
     {
-        $pathDir = '/' . trim(self::$zkConfig['path'], '/') . '/';
-        if (!empty(self::$zkConfig['version'])) {
-            $pathDir .= trim(self::$zkConfig['version'], '/') . '/';
-        }
+        $pathDir = CommonFunctions::getWatchPath();
         $pathDir .= trim($path, '/');
 
         try {
@@ -73,11 +69,6 @@ class ZookeeperBaseService {
      */
     protected function init()
     {
-        self::$zkConfig = [
-            'host'    => CommonFunctions::getZkConfigCache('zk_host'),
-            'path'    => CommonFunctions::getZkConfigCache('zk_root_path'),
-            'version' => CommonFunctions::getZkConfigCache('zk_version'),
-        ];
-        self::$zk       = new \Zookeeper(self::$zkConfig['host'], null, 500);
+        self::$zk = new \Zookeeper(CommonFunctions::getZkConfigCache('zk_host'), null, 500);
     }
 }

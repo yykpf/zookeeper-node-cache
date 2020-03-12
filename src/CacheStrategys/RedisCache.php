@@ -2,7 +2,7 @@
 namespace ZookeeperNodeCache\CacheStrategys;
 
 use Predis\Client;
-use ZookeeperNodeCache\InstanceTrait;
+use ZookeeperNodeCache\Tools\InstanceTrait;
 use ZookeeperNodeCache\Tools\CommonFunctions;
 
 /**
@@ -131,6 +131,8 @@ class RedisCache extends CacheAbs {
     }
 
     /**
+     * 获取全部值
+     *
      * @return array
      */
     public function getAllData():array

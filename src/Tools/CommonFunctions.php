@@ -3,8 +3,8 @@ namespace ZookeeperNodeCache\Tools;
 
 use ZookeeperNodeCache\CacheStrategys\CacheAbs;
 use ZookeeperNodeCache\CacheStrategys\FileCache;
-use ZookeeperNodeCache\CacheStrategys\RedisCache;
 use ZookeeperNodeCache\CacheStrategys\NullCache;
+use ZookeeperNodeCache\CacheStrategys\RedisCache;
 
 /**
  * Class CommonFunctions
@@ -67,7 +67,35 @@ class CommonFunctions {
      */
     public static function transToKey(string $zkFullPath): string
     {
-        return self::getZkConfigCache('cache_prefix') . ':' . str_replace('/', ':', trim($zkFullPath, '/'));
+        $node = str_replace(self::getWatchPath(), '', $zkFullPath);// 去除多余路径
+        !empty($cachePrefix = self::getZkConfigCache('cache_prefix')) && $cachePrefix .= ':';
+
+        return $cachePrefix . ':' . str_replace('/', ':', trim($node, '/'));
+    }
+
+    /**
+     * 获取监听路径
+     *
+     * @return string
+     */
+    public static function getWatchPath():string
+    {
+        $path = '/' . trim(self::getZkRootPath('zk_root_path'), '/');
+        !empty($version = trim(self::getZkRootPath('zk_version'), '/')) && $path .= '/' . $version . '/';
+
+        return $path;// 路径加版本号
+    }
+
+    /**
+     * 根路径
+     *
+     * @param string $path
+     *
+     * @return string
+     */
+    public static function getZkRootPath(string $path):string
+    {
+        return rtrim(self::getZkConfigCache($path), '/');
     }
 
     /**
@@ -79,7 +107,7 @@ class CommonFunctions {
      */
     public static function getZkConfigCache(string $key):string
     {
-        return (string)array_get(ZOOKEEPER_NODE_CACHE_CONFIG, $key);
+        return (string) array_get(ZOOKEEPER_NODE_CACHE_CONFIG, $key);
     }
 
     /**
@@ -99,17 +127,4 @@ class CommonFunctions {
     {
         return storage_path() . DIRECTORY_SEPARATOR . 'zkconfig' . DIRECTORY_SEPARATOR . 'config.json';
     }
-
-    /**
-     * 根路径
-     *
-     * @param string $path
-     *
-     * @return string
-     */
-    public static function getZkRootPath(string $path):string
-    {
-        return rtrim(self::getZkConfigCache($path), '/');
-    }
-
 }

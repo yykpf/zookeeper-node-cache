@@ -1,7 +1,7 @@
 <?php
 namespace ZookeeperNodeCache\CacheStrategys;
 
-use ZookeeperNodeCache\InstanceTrait;
+use ZookeeperNodeCache\Tools\InstanceTrait;
 use ZookeeperNodeCache\Tools\CommonFunctions;
 
 /**
@@ -106,6 +106,11 @@ class FileCache extends CacheAbs {
         return json_encode($config, JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * 获取全部值
+     *
+     * @return array
+     */
     public function getAllData():array
     {
         $zkConfigFile = $this->getCacheFile();
@@ -160,6 +165,8 @@ class FileCache extends CacheAbs {
     }
 
     /**
+     * 获取缓存值
+     *
      * @param string $zkFullPath
      *
      * @return string

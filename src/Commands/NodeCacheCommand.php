@@ -49,7 +49,7 @@ class NodeCacheCommand extends Command {
 
         // 获取配置
         $host = CommonFunctions::getZkConfigCache('zk_host');
-        $root = CommonFunctions::getZkRootPath('zk_root_path');
+        $root = CommonFunctions::getWatchPath(); // 获取监听路径
         $mode = CommonFunctions::getZkConfigCache('cache_mode');
 
         // 获取缓存策略

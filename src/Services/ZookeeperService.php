@@ -2,8 +2,9 @@
 namespace ZookeeperNodeCache\Services;
 
 use ZookeeperNodeCache\CacheStrategys\CacheAbs;
-use ZookeeperNodeCache\CacheStrategys\EnvCache;
 use ZookeeperNodeCache\CacheStrategys\NullCache;
+use ZookeeperNodeCache\InsideServices\EnvCacheService;
+use ZookeeperNodeCache\InsideServices\ZookeeperBaseService;
 use ZookeeperNodeCache\Tools\CommonFunctions;
 
 /**
@@ -43,12 +44,12 @@ class ZookeeperService {
      */
     private function getCache(CacheAbs $cache, string $node):string
     {
-        $key = $this->getKey($node); // 获取key值
-        if ($value = EnvCacheService::getInstance()->getCacheConf($key)) { // 是否存在env变量
+        $zkFullPath = $this->getZkPath($node); // 获取key值
+        if ($value = EnvCacheService::getInstance()->getCacheConf($zkFullPath)) { // 是否存在env变量
             return (string) $value;
         }
 
-        return (string) $cache->getCacheConf($key);
+        return (string) $cache->getCacheConf($zkFullPath);
     }
 
     /**
@@ -58,10 +59,10 @@ class ZookeeperService {
      *
      * @return string
      */
-    private function getKey(string $node):string
+    private function getZkPath(string $node):string
     {
-        // 获取保存的键
-        return CommonFunctions::getZkRootPath('zk_root_path') . '/' . trim($node, '/');
+        // 获取全路径
+        return CommonFunctions::getWatchPath() . trim($node, '/');
     }
 
     /**
