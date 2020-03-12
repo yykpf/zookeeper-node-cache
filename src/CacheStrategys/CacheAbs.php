@@ -22,7 +22,7 @@ abstract class  CacheAbs {
      */
     abstract public function getCacheConf(string $zkFullPath):string;
 
-    abstract public function getAllData():array;
+    abstract public function getCacheAllConf():array;
 
     /**
      * 数据转换

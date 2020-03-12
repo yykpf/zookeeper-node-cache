@@ -19,7 +19,7 @@ class WatcherEvent {
     public function __construct($host, $rootPath)
     {
         $this->host = $host;
-        $this->rootPath = $rootPath;
+        $this->rootPath = rtrim($rootPath,'/');
     }
 
     /**

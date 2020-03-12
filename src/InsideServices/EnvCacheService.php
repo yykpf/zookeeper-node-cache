@@ -23,7 +23,7 @@ class EnvCacheService {
      */
     public function setCacheConf(CacheAbs $cache): array
     {
-        $config = $cache->getAllData();
+        $config = $cache->getCacheAllConf();
         CommonFunctions::putZkEnv($config);
 
         return $config;

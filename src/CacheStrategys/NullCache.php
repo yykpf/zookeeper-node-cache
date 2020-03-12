@@ -24,7 +24,7 @@ class NullCache extends CacheAbs {
     {
     }
 
-    public function getAllData():array
+    public function getCacheAllConf():array
     {
     }
 }

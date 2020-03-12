@@ -15,6 +15,14 @@ use ZookeeperNodeCache\Tools\CommonFunctions;
 class ZookeeperService {
 
     /**
+     * ZookeeperService constructor.
+     */
+    public function __construct()
+    {
+        CommonFunctions::setZkConfigCache(); // 缓存zk配置
+    }
+
+    /**
      * 获取节点值
      *
      * @param string $key
@@ -23,15 +31,13 @@ class ZookeeperService {
      */
     public function getNode(string $node, string $default = ''):string
     {
-        CommonFunctions::setZkConfigCache(); // 缓存zk配置
-
-        $cache = CommonFunctions::getService(CommonFunctions::getZkConfigCache('cache_mode')); // 获取缓存策略
-        if ($cache instanceof NullCache) {
+        $cacheStrategy = CommonFunctions::getService(CommonFunctions::getZkConfigCache('cache_mode')); // 获取缓存策略
+        if ($cacheStrategy instanceof NullCache) {
             // 调用zk原始获取
             return ZookeeperBaseService::getInstance()->getRetryNodeValue($node, $default);
         }
 
-        return $this->getCache($cache, $node);
+        return $this->getCache($cacheStrategy, $node);
     }
 
     /**
@@ -42,14 +48,14 @@ class ZookeeperService {
      *
      * @return string
      */
-    private function getCache(CacheAbs $cache, string $node):string
+    private function getCache(CacheAbs $cacheStrategy, string $node):string
     {
         $zkFullPath = $this->getZkPath($node); // 获取key值
         if ($value = EnvCacheService::getInstance()->getCacheConf($zkFullPath)) { // 是否存在env变量
             return (string) $value;
         }
 
-        return (string) $cache->getCacheConf($zkFullPath);
+        return (string) $cacheStrategy->getCacheConf($zkFullPath);
     }
 
     /**
@@ -66,15 +72,16 @@ class ZookeeperService {
     }
 
     /**
+     * 给zk节点添加环境变量
      * 目前只支持 file 方式的 env缓存
      *
-     * @return \ZookeeperNodeCache\Services\viod
+     * @return \ZookeeperNodeCache\Services\void
      */
-    public function putEnv():viod
+    public function putZkEnv():void
     {
-        $cache = CommonFunctions::getService(CommonFunctions::getZkConfigCache('cache_mode')); // 获取缓存策略
-        if (!$cache instanceof NullCache) {
-            EnvCacheService::getInstance()->setCacheConf($cache);
+        $cacheStrategy = CommonFunctions::getService(CommonFunctions::getZkConfigCache('cache_mode')); // 获取缓存策略
+        if (!$cacheStrategy instanceof NullCache) {
+            EnvCacheService::getInstance()->setCacheConf($cacheStrategy);
         }
     }
 }

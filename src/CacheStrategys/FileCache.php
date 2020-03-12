@@ -111,7 +111,7 @@ class FileCache extends CacheAbs {
      *
      * @return array
      */
-    public function getAllData():array
+    public function getCacheAllConf():array
     {
         $zkConfigFile = $this->getCacheFile();
         $config       = [];

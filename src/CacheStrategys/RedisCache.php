@@ -135,7 +135,7 @@ class RedisCache extends CacheAbs {
      *
      * @return array
      */
-    public function getAllData():array
+    public function getCacheAllConf():array
     {
         return [];
     }
