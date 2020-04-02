@@ -115,7 +115,7 @@ class CommonFunctions {
      */
     public static function setZkConfigCache()
     {
-        defined('ZOOKEEPER_NODE_CACHE_CONFIG') or define('ZOOKEEPER_NODE_CACHE_CONFIG', @require_once config_path().DIRECTORY_SEPARATOR.'zookeepercache.php');
+        defined('ZOOKEEPER_NODE_CACHE_CONFIG') or define('ZOOKEEPER_NODE_CACHE_CONFIG', @require_once base_path() . DIRECTORY_SEPARATOR . 'config'.DIRECTORY_SEPARATOR.'zookeepercache.php');
     }
 
     /**
