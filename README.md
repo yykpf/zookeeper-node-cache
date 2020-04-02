@@ -12,6 +12,17 @@
     2、发布服务创建配置文件
     
          php artisan vendor:publish --provider='ZookeeperNodeCache\ZookeeperServiceProvider'
+       有点服务可能不支持自动发布：
+          在config/app.php 中添加
+              ```php
+                 'providers' => [
+                       ...
+                       ZookeeperNodeCache\ZookeeperServiceProvider::class
+                 ],
+                 'aliases' => [
+                      'zk' => ZookeeperNodeCache\Facades\ZookeeperFacade::class
+                  ],
+              ```
 
     3、通过执行以下命令来开启zk缓存，缓存方式在config文件配置zookeepercache[支持文件和redis两种方式]
         
