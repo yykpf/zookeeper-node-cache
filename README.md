@@ -12,9 +12,10 @@
     2、发布服务创建配置文件
     
          php artisan vendor:publish --provider='ZookeeperNodeCache\ZookeeperServiceProvider'
-       有点服务可能不支持自动发布：
+       有些服务可能不支持自动发布，就需要：
           在config/app.php 中添加
-              ```php
+          
+              ```
                  'providers' => [
                        ...
                        ZookeeperNodeCache\ZookeeperServiceProvider::class
