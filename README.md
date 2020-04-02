@@ -38,4 +38,4 @@
     7、如果想使用env缓存(目前支持文件类型的缓存)
         use zk;
         
-            zk::putEnv() 
+            zk::putZkEnv() 
