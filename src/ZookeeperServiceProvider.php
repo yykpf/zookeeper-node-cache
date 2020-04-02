@@ -4,7 +4,7 @@ namespace ZookeeperNodeCache;
 use Illuminate\Support\ServiceProvider;
 use ZookeeperNodeCache\Commands\NodeCacheCommand;
 use ZookeeperNodeCache\Services\ZookeeperService;
-
+use ZookeeperNodeCache\Tools\CommonFunctions;
 /**
  * Class ZookeeperServiceProvider
  *
@@ -32,7 +32,7 @@ class ZookeeperServiceProvider extends ServiceProvider {
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/config.php' => config_path('zookeepercache.php'),
+            __DIR__ . '/config.php' => CommonFunctions::getConfigPath(),
         ]);
 
         $this->registerCommand();
